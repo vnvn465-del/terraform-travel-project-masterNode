@@ -1,6 +1,4 @@
-# ==========================================
 # 1. VPC 설정
-# ==========================================
 resource "aws_vpc" "k8s_vpc" {
   cidr_block           = "172.31.0.0/16"
   enable_dns_hostnames = true
@@ -8,9 +6,7 @@ resource "aws_vpc" "k8s_vpc" {
   tags = { Name = "k8s-main-vpc" }
 }
 
-# ==========================================
 # 2. 서브넷 설정
-# ==========================================
 resource "aws_subnet" "subnet_1" {
   vpc_id            = aws_vpc.k8s_vpc.id
   cidr_block        = "172.31.0.0/20"
@@ -47,9 +43,7 @@ resource "aws_internet_gateway" "igw" {
   tags   = { Name = "k8s-igw" }
 }
 
-# ==========================================
 # 4. 퍼블릭 라우팅 테이블 & 연결 
-# ==========================================
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.k8s_vpc.id
 
@@ -70,9 +64,7 @@ resource "aws_route_table_association" "public_2_assoc" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-# ==========================================
 # 5. 프라이빗 라우팅 테이블 & 연결 
-# ==========================================
 resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.k8s_vpc.id
   tags = { Name = "k8s-private-rt" }
