@@ -45,7 +45,6 @@ resource "aws_security_group" "k8s_sg" {
   }
 
   # 5. SSH 관리 접속 (22)
-  # 터미널 접속을 위해 보안상 의협님의 특정 IP(14.33.xx.xx)만 허용한 디테일이 훌륭합니다.
   ingress {
     from_port   = 22
     to_port     = 22
