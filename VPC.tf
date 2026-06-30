@@ -35,9 +35,8 @@ resource "aws_subnet" "subnet_4" {
   tags = { Name = "k8s-subnet-2d" }
 }
 
-# ==========================================
+
 # 3. 인터넷 게이트웨이(IGW) 생성
-# ==========================================
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.k8s_vpc.id
   tags   = { Name = "k8s-igw" }
