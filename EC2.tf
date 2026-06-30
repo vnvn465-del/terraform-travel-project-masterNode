@@ -42,14 +42,14 @@ resource "aws_instance" "k8s_master" {
 resource "aws_instance" "k8s_worker" {
   ami           = "ami-03fd85ef2fae79c05" 
   
-  # 마스터 노드와 동일한 2vCPU, 8GB RAM 사양 선택
+  #  2vCPU, 8GB RAM 사양 선택
   instance_type = "t3.large"
 
-  # [핵심 포인트] 고가용성(HA)을 위해 마스터(subnet_1, 2a)와 다른 가용 영역인 
+  #  고가용성(HA)을 위해 마스터(subnet_1, 2a)와 다른 가용 영역인 
   # 퍼블릭 서브넷(subnet_2, ap-northeast-2b)에 분산 배치합니다.
   subnet_id     = aws_subnet.subnet_2.id 
   
-  # 보안 그룹 및 키 페어 동일하게 연결
+  # 보안 그룹 및 키 페어  연결
   vpc_security_group_ids = [aws_security_group.k8s_sg.id]
   key_name      = "travel-key"
 
