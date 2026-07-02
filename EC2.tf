@@ -42,8 +42,8 @@ resource "aws_instance" "k8s_master" {
 resource "aws_instance" "k8s_worker" {
   ami           = "ami-03fd85ef2fae79c05" 
   
-  #  2vCPU, 8GB RAM 사양 선택
-  instance_type = "t3.large"
+  #  2vCPU, 4GB RAM 사양 선택
+  instance_type = "t3.medium"
 
   #  고가용성(HA)을 위해 마스터(subnet_1, 2a)와 다른 가용 영역인 
   # 퍼블릭 서브넷(subnet_2, ap-northeast-2b)에 분산 배치합니다.
