@@ -59,6 +59,12 @@ resource "aws_instance" "k8s_worker" {
   # 외부 인터넷 통신을 위한 퍼블릭 IP 할당
   associate_public_ip_address = true
 
+  user_data = <<-EOF
+              #!/bin/bash
+              # 마스터 노드의 Private IP를 바라보고 클러스터에 조인합니다.
+              curl -sfL https://get.k3s.io | K3S_URL=https://${aws_instance.k8s_master.private_ip}:6443 K3S_TOKEN=my-secure-token sh -
+              EOF
+
 
 
   tags = {
