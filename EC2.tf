@@ -25,7 +25,7 @@ resource "aws_instance" "k8s_master" {
   user_data = <<-EOF
               #!/bin/bash
               # K3s 설치 스크립트 실행 (Nginx Ingress 사용을 위해 기본 traefik 제외)
-              curl -sfL https://get.k3s.io | sh -s - server \
+              curl -sfL https://get.k3s.io | K3S_TOKEN=my-secure-token sh -s - server \
                 --write-kubeconfig-mode 644 \
                 --disable traefik
               EOF
